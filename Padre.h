@@ -3,11 +3,11 @@
 
 ref class Padre : public Protagonista {
 
-private:
+private: // particular
 	int aceite;
 	int aceiteMax;
 	int ticksGasto;
-	int contadorAceite;
+	int contadorAceite; 
 
 public:
 	Padre(int x, int y, int vidas) :
@@ -18,12 +18,13 @@ public:
 
 		this->aceiteMax = 100;
 		this->aceite = aceiteMax;
-		this->ticksGasto = 35;
+		this->ticksGasto = 10; // tiempo para que el aceite se baje
 		this->contadorAceite = 0;
+		this->primerFrameMovimiento = 0;
 
 	}
 	~Padre() {}
-
+	
 	// Sobreescritura de metodos
 	String^ GetNombre() override {
 		return "Padre";
@@ -56,7 +57,7 @@ public:
 	
 	// Getters aceite
 	int GetRadioLuz() {
-		int radioAceite = 60 + (int)(aceite * 1.5);
+		int radioAceite = 40 + (int)(aceite * 1.5);
 		return radioAceite;
 	}
 	int GetAceite() {
@@ -66,6 +67,9 @@ public:
 		return aceiteMax;
 	}
 
-
+	// Sobreescritura de hitbox
+	virtual Rectangle GetHitbox() override {
+		return Rectangle(posicion.X+20, posicion.Y+10, ancho-40, alto-15);
+	}
 
 };
