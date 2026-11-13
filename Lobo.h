@@ -5,14 +5,14 @@ ref class Lobo : public Enemigo {
 
 private:
 	int radioLuz; // cuanto va ser el radio en el que se espanta
-	int margenAcecho = 40; // margen de distancia para el lobo
+	int margenAcecho = 30; // margen de distancia para el lobo
 
 public:
-	Lobo(int x, int y, int vel) : Enemigo("Sprites//Lobo.png", x, y, 4, 5, 96, 96, 1, vel, 1, 10) 
+	Lobo(int x, int y, int vel) : Enemigo("Sprites//Lobo.png", x, y, 4, 5, 110, 110, 1, vel, 1, 10) 
 	{
 		this->primerFrameMovimiento = 0;
-		this->ticksPorFrame = 4;
-		this->margenHitbox = 22;
+		this->ticksPorFrame = 2;
+		this->margenHitbox = 20;
 		this->radioLuz = 0;
 	}
 	~Lobo(){}
@@ -23,7 +23,7 @@ public:
 	}
 
 	// Comportamiento propio
-	void Comportamiento() override {
+	void Comportamiento() override  {
 		
 		if (objetivo == nullptr) { return; }
 		
@@ -43,5 +43,9 @@ public:
 
 	}
 
+	// Sobreescritura de hitbox
+	virtual Rectangle GetHitbox() override {
+		return Rectangle(posicion.X+8, posicion.Y + 30, ancho-30, alto - 60);
+	}
 
 };
