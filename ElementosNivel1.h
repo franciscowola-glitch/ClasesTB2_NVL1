@@ -15,7 +15,7 @@ public:
 
 	// Sobreescritura de hitbox
 	virtual Rectangle GetHitbox() override {
-		return Rectangle(posicion.X + 30, posicion.Y + 20, ancho - 60, alto - 40);
+		return Rectangle(posicion.X + 40, posicion.Y + 30, ancho - 80, alto - 60);
 	}
 
 
@@ -37,3 +37,37 @@ public:
 
 };
 
+ref class LenaArbol : public Recurso {
+
+public:
+
+	LenaArbol(int x, int y, int ancho, int alto, int valor) : Recurso("Sprites//Tronco.png", x, y, 1, 1, ancho, alto, TipoRecurso::Lena, valor)
+	{
+	}
+	~LenaArbol() {}
+
+	// Sobreescritura de hitbox
+	virtual Rectangle GetHitbox() override {
+		return Rectangle(posicion.X + 40, posicion.Y + 35, ancho - 80, alto - 70);
+	}
+
+};
+
+ref class MontonDePiedras : public Obstaculo {
+
+public:
+	MontonDePiedras(int x, int y, int ancho, int alto) :
+		Obstaculo("Sprites//MontonPiedras.png", x, y, 1, 1, ancho, alto, 1000)
+	{
+
+	}
+	~MontonDePiedras() {}
+
+
+	// Sobreescritura de hitbox
+	virtual Rectangle GetHitbox() override {
+		return Rectangle(posicion.X + 35, posicion.Y + 20, ancho - 70, alto - 60);
+	}
+
+
+};
