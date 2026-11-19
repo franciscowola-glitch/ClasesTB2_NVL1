@@ -8,12 +8,13 @@ private:
 	int margenAcecho = 30; // margen de distancia para el lobo
 
 public:
-	Lobo(int x, int y, int vel) : Enemigo("Sprites//Lobo.png", x, y, 4, 5, 110, 110, 1, vel, 1, 10) 
+	Lobo(int x, int y, int vel) : Enemigo("Sprites//Lobo.png", x, y, 4, 5, 120, 120, 1, vel, 1, 10) 
 	{
 		this->primerFrameMovimiento = 0;
 		this->ticksPorFrame = 2;
 		this->margenHitbox = 20;
 		this->radioLuz = 0;
+		this->atraviesaObstaculos = true; // pq si
 	}
 	~Lobo(){}
 
@@ -47,5 +48,7 @@ public:
 	virtual Rectangle GetHitbox() override {
 		return Rectangle(posicion.X+8, posicion.Y + 30, ancho-30, alto - 60);
 	}
+
+
 
 };
