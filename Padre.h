@@ -11,14 +11,14 @@ private: // particular
 
 public:
 	Padre(int x, int y, int vidas) :
-		Protagonista("Sprites//Padre.png", x, y, 4, 9, 85, 85, vidas, 4)
+		Protagonista("Sprites//Padre.png", x, y, 4, 9, 110, 110, vidas,5)
 	{
-		this->ticksPorFrame = 4;
+		this->ticksPorFrame = 2;
 		this->margenHitbox = 15;
 
 		this->aceiteMax = 100;
 		this->aceite = aceiteMax;
-		this->ticksGasto = 10; // tiempo para que el aceite se baje
+		this->ticksGasto = 30; // tiempo para que el aceite se baje
 		this->contadorAceite = 0;
 		this->primerFrameMovimiento = 0;
 
@@ -45,6 +45,9 @@ public:
 		}
 
 	}
+	void ReducirAceite(int n) {
+		this->aceite -= n;
+	}
 	void RecargarAceite(int cant) {
 		if (aceite + cant >= aceiteMax) {
 			aceite = aceiteMax;
@@ -54,7 +57,11 @@ public:
 		}
 
 	}
-	
+	void AceiteAgotado() {
+		this->aceite = 0;
+	}
+
+
 	// Getters aceite
 	int GetRadioLuz() {
 		int radioAceite = 40 + (int)(aceite * 1.5);
@@ -66,10 +73,22 @@ public:
 	int GetAceiteMax() {
 		return aceiteMax;
 	}
+	void GastarPorGolpeDeHacha() {
+		if (this->GetAceite() - 4 <= 0) {
+			this->AceiteAgotado();
+		}
+		else {
+			this->ReducirAceite(4);
+		}
+	}
 
 	// Sobreescritura de hitbox
 	virtual Rectangle GetHitbox() override {
-		return Rectangle(posicion.X+20, posicion.Y+10, ancho-40, alto-15);
+		return Rectangle(posicion.X+35, posicion.Y+12, ancho-70, alto-25);
+	}
+
+	void BajarVida() {
+		this->vidas -= 1;
 	}
 
 };
