@@ -20,6 +20,10 @@ public:
 
 	}
 
+	virtual Rectangle GetHitbox()  override {
+		return Rectangle(posicion.X+20, posicion.Y+20, ancho-40, alto-40);
+	}
+
 
 
 };
