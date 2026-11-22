@@ -71,3 +71,78 @@ public:
 
 
 };
+
+ref class PozoDeAgua : public Obstaculo {
+
+public:
+	PozoDeAgua(int x, int y, int ancho, int alto) :
+		Obstaculo("Sprites//PozoDeAgua.png", x, y, 1, 1, ancho, alto, 0)
+	{
+
+	}
+	~PozoDeAgua() {}
+
+
+	// Sobreescritura de hitbox
+	virtual Rectangle GetHitbox() override {
+		return Rectangle(posicion.X + 75, posicion.Y + 70, ancho - 150, alto - 100);
+	}
+
+
+};
+
+ref class Puerta : public Obstaculo {
+
+private:
+	bool abriendo;
+	bool abierta;
+	int contadorTicks;
+
+public:
+	Puerta(int x, int y) :
+		Obstaculo("Sprites//Puerta.png", x, y, 1, 5, 200, 152, 0)
+	{
+		abriendo = false;
+		abierta = false;
+		contadorTicks = 0;
+	}
+	~Puerta(){
+
+	}
+
+	void Abrir() {
+		this->abriendo = true;
+	}
+
+	void Actualizar() override {
+		contadorTicks++;
+		if (abriendo && contadorTicks > 6) {
+			frameX++;
+			contadorTicks = 0;
+		}
+		// ultima fase de apertura 
+		if (frameX == 4) {
+			abriendo = false;
+			abierta = true;
+		}
+	}
+
+	// Sobreescritura de hitbox
+	virtual Rectangle GetHitbox() override {
+		return Rectangle(posicion.X + ancho * 10 / 100,
+			posicion.Y,
+			ancho * 80 / 100,
+			alto - 75);
+	}
+
+
+	void SetAbierta() {
+		frameX = 4;
+		abierta = true;
+	}
+	bool GetAbierta() {
+		return this->abierta;
+	}
+
+
+};
